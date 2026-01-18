@@ -21,7 +21,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Tutorial - 5min ⏱️
+            Tutorial: A Python Terraform Provider in 5 minutes ⏱️
           </Link>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={`${siteConfig.title} - ${siteConfig.tagline}`}
-      description="Description will go into a meta tag in <head />">
+      description="Custom CRUD - terraform providers in any language!">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
