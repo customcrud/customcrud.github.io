@@ -15,7 +15,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_data-processing.svg').default,
     description: (
       <>
-        No provider for <strong>______</strong>? Make your own quickly, in any language.
+        No provider for <strong>______</strong>? Make your own quickly, in <em>any language</em>.
       </>
     ),
   },

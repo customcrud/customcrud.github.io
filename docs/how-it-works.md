@@ -8,7 +8,7 @@ All CRUD (Create, Read, Update, Delete) operations are delegated to external com
 
 Terraform manages the state, dependencies, and lifecycle of your resources just as it normally would. But with Custom CRUD, the actual "heavy lifting" - making API calls, writing files, or running commands — is done by whatever handler you provide. This allows you to manage all your CRUD-able resources with terraform, as well as custom data sources.
 
-Custom CRUD endeavors to support as much of the terraform plugin framework API as is possible via provider and resource options, massively speeding up your custom provider development by avoiding the need to publish a custom terraform provider (and all the infra headaches that come with it such as a private provider registry + config).
+Custom CRUD endeavors to support as much of the terraform plugin framework API as is possible via provider and resource options, massively speeding up your virtual provider development by avoiding the need to publish a full-fat terraform provider (and all the infra headaches that can come with it such as a private provider registry + config).
 
 ## The Protocol
 
