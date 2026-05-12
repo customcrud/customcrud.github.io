@@ -35,7 +35,7 @@ When the provider executes your script, it sends a JSON object with the followin
 ```
 
 *   **`id`**: The unique identifier of the resource. This will be populated by the `id` field returned from the `create`. (populated in all hooks other than `create`)
-*   **`input`**: The merged result of your `input` and `input_wo` arguments from your Terraform configuration.
+*   **`input`**: The merged result of your `input` and `input_wo` arguments from your Terraform configuration. See [Write-Only Inputs](./write-only-inputs.md) for details on `input_wo`.
 *   **`output`**: Stored output values from the previous hook run. (populated in all hooks other than `create`)
 
 ### Output (`stdout`)
@@ -62,6 +62,10 @@ The provider uses the script's exit code to determine success or failure:
 *   **22**: Resource Not Found.
     *   Only in the `read` hook: Signals that the resource no longer exists. Terraform will remove it from the state, and a creation will show up in your plan.
 *   **Any other non-zero**: Error. The provider will fail the Terraform operation and display the script's `stderr` to the user.
+
+## Ephemeral Resources
+
+Custom CRUD also supports [ephemeral resources](./ephemeral-resources.md) — short-lived values that are never stored in Terraform state. These use `open`, `renew`, and `close` hooks instead of CRUD hooks, and follow the same JSON stdin/stdout protocol.
 
 ## Environment Variables
 
