@@ -85,3 +85,7 @@ This example isn't very useful in the real world, but this same concept can be a
 - triggering CI/CD pipelines that create resources
 
 By enabling terraform to be used for any resource, you can have *all* of your dependencies managed by terraform's dependency management.
+
+:::tip
+Custom CRUD also supports [data sources](./data-sources.md) for read-only lookups, [ephemeral resources](./ephemeral-resources.md) for short-lived secrets, and [provider-level configuration](./provider-configuration.md) for global options like parallelism and default inputs.
+:::

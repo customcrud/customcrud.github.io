@@ -10,14 +10,97 @@
   overflow: hidden;
 }
 
+.heroBgLogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120vw;
+  height: 120vw;
+  opacity: 0.6;
+  animation: bgLogoDrift 180s linear infinite, bgLogoBlur 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroBgLogo1 {
+  top: 40%;
+  left: 30%;
+  animation: bgLogoDrift 180s linear infinite, bgLogoBlur 12s ease-in-out infinite;
+}
+
+.heroBgLogo2 {
+  top: 60%;
+  left: 70%;
+  animation: bgLogoDrift 220s linear infinite reverse, bgLogoBlur 16s ease-in-out infinite;
+  animation-delay: 0s, -4s;
+}
+
+.heroBgLogo3 {
+  top: 20%;
+  left: 60%;
+  animation: bgLogoDrift 250s linear infinite, bgLogoBlur 20s ease-in-out infinite;
+  animation-delay: 0s, -8s;
+}
+
+.heroBgLogo4 {
+  top: 70%;
+  left: 40%;
+  animation: bgLogoDrift 200s linear infinite reverse, bgLogoBlur 14s ease-in-out infinite;
+  animation-delay: 0s, -3s;
+}
+
+@keyframes bgLogoDrift {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translate(30px, 0);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(90deg) translate(0, 40px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) translate(-30px, 0);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(270deg) translate(0, -40px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translate(30px, 0);
+  }
+}
+
+@keyframes bgLogoBlur {
+  0%, 100% {
+    filter: blur(0px);
+  }
+  50% {
+    filter: blur(24px);
+  }
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;
   }
 }
 
+.heroBanner :global(.container) {
+  position: relative;
+  z-index: 1;
+}
+
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.buttons :global(.button) {
+  white-space: normal;
+  text-align: center;
+}
+
+.githubStars {
+  margin-top: 1.5rem;
 }
