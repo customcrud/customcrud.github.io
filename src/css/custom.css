@@ -28,3 +28,21 @@
   --ifm-color-primary-lightest: #D1FFD6;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3); */
 }
+
+.github-stars-navbar {
+  border: 0;
+  display: block;
+  height: 30px;
+  width: 170px;
+}
+
+.navbar__item:has(.github-stars-navbar) {
+  align-items: center;
+  display: flex;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.navbar-sidebar .github-stars-navbar-item {
+  display: none;
+}

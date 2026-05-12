@@ -69,7 +69,7 @@
 
 @keyframes bgLogoBlur {
   0%, 100% {
-    filter: blur(0px);
+    filter: blur(5px);
   }
   50% {
     filter: blur(24px);
@@ -101,6 +101,27 @@
   text-align: center;
 }
 
-.githubStars {
-  margin-top: 1.5rem;
+.providerLabel {
+  background: rgba(255, 255, 255, 0.1);
+  display: inline-block;
+  padding: 0 0.2em;
+}
+
+.providerLanguage {
+  display: inline-block;
+  font-weight: 700;
+  min-width: 5.8em;
+  text-align: left;
+}
+
+.providerLanguage::after {
+  content: '_';
+  margin-left: 0.08em;
+  animation: cursorBlink 1s steps(1) infinite;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
 }

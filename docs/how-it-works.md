@@ -34,13 +34,15 @@ When the provider executes your script, it sends a JSON object with the followin
 }
 ```
 
-*   **`id`**: The unique identifier of the resource. This will be populated by the `id` field returned from the `create`. (populated in all hooks other than `create`)
-*   **`input`**: The merged result of your `input` and `input_wo` arguments from your Terraform configuration. See [Write-Only Inputs](./write-only-inputs.md) for details on `input_wo`.
-*   **`output`**: Stored output values from the previous hook run. (populated in all hooks other than `create`)
+*   **`id`**: The unique identifier of the resource. This is populated from the `id` field returned by `create`, and is sent to `read`, `update`, and `delete`.
+*   **`input`**: Resource `input` merged with provider `default_inputs`. During `create` and `update`, `input_wo` is also merged into this field. See [Write-Only Inputs](./write-only-inputs.md) for details on `input_wo`.
+*   **`output`**: Stored output values from the previous hook run. This is sent to `read`, `update`, and `delete`.
+
+Data source `read` hooks receive only `input`. Ephemeral `open` hooks also receive only `input`; ephemeral `renew` and `close` hooks receive the original ephemeral `input` and `output` saved after `open`.
 
 ### Output (`stdout`)
 
-Your script must print a valid JSON object to stdout. This object is used to update the Terraform state.
+For `create`, `read`, `update`, data source `read`, and ephemeral `open`, your script must print a valid JSON object to stdout. This object is used to update Terraform state or the ephemeral result. `delete`, `renew`, and `close` hooks do not need to print JSON.
 
 ```json
 {
@@ -52,7 +54,7 @@ Your script must print a valid JSON object to stdout. This object is used to upd
 ```
 
 *   **`id`**: (Required for `create`) The new ID of the resource. If omitted in other phases, the existing ID is preserved.
-*   **Other keys**: Any other keys returned will be stored in the resource's `output` map and effectively merged into the `input` map for future runs.
+*   **Other keys**: Any other keys returned will be stored in the resource's `output` map. If an output key already exists in `input`, that `input` value is updated to match the returned output value for future runs.
 
 ### Exit Codes
 
@@ -63,6 +65,16 @@ The provider uses the script's exit code to determine success or failure:
     *   Only in the `read` hook: Signals that the resource no longer exists. Terraform will remove it from the state, and a creation will show up in your plan.
     *   This exit code is configurable via the [`missing_resource_exit_code`](./provider-configuration.md#missing_resource_exit_code) provider option.
 *   **Any other non-zero**: Error. The provider will fail the Terraform operation and display the script's `stderr` to the user.
+
+## Hook Commands
+
+Hook command strings are parsed using shell-style quoting and whitespace rules, then executed directly. They are not run through an interactive shell, so shell features such as pipes, redirects, glob expansion, and environment-variable expansion require an explicit shell wrapper:
+
+```hcl
+hooks {
+  read = "sh -c 'my-command | jq .'"
+}
+```
 
 ## Resource Behaviors
 

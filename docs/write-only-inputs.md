@@ -8,7 +8,7 @@ The `input_wo` attribute allows you to pass sensitive data to your hook scripts 
 
 ## How It Works
 
-`input_wo` is a JSON string that gets merged into the `input` field your hook scripts receive via stdin. The values are only available during `create` and `update` operations and are never persisted in Terraform state
+`input_wo` is a JSON string that gets merged into the `input` field your hook scripts receive via stdin. The values are only available during `create` and `update` operations and are never persisted in Terraform state.
 
 :::note
 see [#61](https://github.com/customcrud/terraform-provider-customcrud/issues/61#issuecomment-3893443556) for why `read` and `delete` cannot receive write-only inputs.

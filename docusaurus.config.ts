@@ -130,6 +130,13 @@ const config: Config = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          type: 'html',
+          className: 'github-stars-navbar-item',
+          position: 'right',
+          value:
+            '<iframe class="github-stars-navbar" src="https://ghbtns.com/github-btn.html?user=customcrud&repo=terraform-provider-customcrud&type=star&count=true&size=large" width="170" height="30" title="GitHub Stars"></iframe>',
+        },
       ],
     },
     footer: {

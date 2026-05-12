@@ -105,9 +105,9 @@ ephemeral "customcrud" "temp_creds" {
 }
 ```
 
-The `renew` hook receives the original input and output via stdin and is called periodically to extend the resource's lifetime. The `close` hook is called when Terraform no longer needs the ephemeral resource.
+The `renew` hook receives the original input and output via stdin and is called periodically to extend the resource's lifetime. The `close` hook receives the same payload and is called when Terraform no longer needs the ephemeral resource. Neither hook needs to return JSON.
 
 ## Supported Versions
 
-- Terraform >= 1.10
-- customcrud >= v3.12.0
+- Terraform >= 1.10 for ephemeral resources
+- Terraform >= 1.11 when combining ephemeral resources with `input_wo`
