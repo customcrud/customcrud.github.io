@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
+  titleClass: string;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: ReactNode;
 };
@@ -12,6 +13,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Terraform Everything',
+    titleClass: styles.accentBlue,
     Svg: require('@site/static/img/undraw_data-processing.svg').default,
     description: (
       <>
@@ -21,6 +23,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Keep your secrets, secret!',
+    titleClass: styles.accentPink,
     Svg: require('@site/static/img/undraw_security-on.svg').default,
     description: (
       <>
@@ -30,6 +33,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Developer Happiness',
+    titleClass: styles.accentGreen,
     Svg: require('@site/static/img/undraw_programming.svg').default,
     description: (
       <>
@@ -39,15 +43,17 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, titleClass, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+      <div className={styles.featureCard}>
+        <div className="text--center">
+          <Svg className={styles.featureSvg} role="img" />
+        </div>
+        <div className="text--center padding-horiz--md">
+          <Heading as="h3" className={clsx(styles.featureTitle, titleClass)}>{title}</Heading>
+          <p>{description}</p>
+        </div>
       </div>
     </div>
   );

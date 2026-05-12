@@ -4,19 +4,26 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0 5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: radial-gradient(ellipse at 20% 50%, rgba(106, 255, 120, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(107, 145, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(255, 107, 155, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 20%, rgba(255, 213, 107, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #1b1b2f 0%, #0f0f1a 100%);
 }
 
 .heroBgLogo {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120vw;
-  height: 120vw;
-  opacity: 0.6;
+  width: 100vw;
+  height: 100vw;
+  max-width: 800px;
+  max-height: 800px;
+  opacity: 0.07;
   animation: bgLogoDrift 180s linear infinite, bgLogoBlur 12s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -78,7 +85,7 @@
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 3rem 1.5rem;
   }
 }
 
@@ -87,13 +94,28 @@
   z-index: 1;
 }
 
+.heroTitle {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
+  gap: 1rem;
 }
 
 .buttons :global(.button) {
@@ -101,8 +123,40 @@
   text-align: center;
 }
 
+.primaryButton {
+  background: linear-gradient(135deg, #6b91ff 0%, #6aff78 100%);
+  color: #0f0f1a;
+  border: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(107, 145, 255, 0.3);
+  color: #0f0f1a;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 8px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.secondaryButton:hover {
+  border-color: #6b91ff;
+  color: #fff;
+}
+
 .providerLabel {
-  background: rgba(255, 255, 255, 0.1);
   display: inline-block;
   padding: 0 0.2em;
 }
@@ -112,12 +166,15 @@
   font-weight: 700;
   min-width: 5.8em;
   text-align: left;
+  color: var(--lang-color, #6aff78);
+  transition: color 0.3s ease;
 }
 
 .providerLanguage::after {
   content: '_';
   margin-left: 0.08em;
   animation: cursorBlink 1s steps(1) infinite;
+  color: inherit;
 }
 
 @keyframes cursorBlink {
