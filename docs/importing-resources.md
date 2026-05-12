@@ -9,7 +9,7 @@ One of the major advantages of Custom CRUD over other similar projects is it's a
 Imports work via encoding all of the provider hook information into json and using that as the import ID, for example:
 
 ```shell
-terraform import customcrud.file_example '{"id":"/path/to/file","hooks":{"create":"create.sh","read":"read.sh","update":"update.sh","delete":"delete.sh","input":{"content":"test"},"output"{"content":"test"}}}'
+terraform import customcrud.file_example '{"id":"/path/to/file","hooks":{"create":"create.sh","read":"read.sh","update":"update.sh","delete":"delete.sh"},"input":{"content":"test"},"output":{"content":"test"}}'
 ```
 
 or more easily via a declarative import:
@@ -24,12 +24,12 @@ import {
       read   = "read.sh"
       update = "update.sh"
       delete = "delete.sh"
-      input = {
-        content = "test"
-      }
-      output = {
-        content = "test"
-      }
+    }
+    input = {
+      content = "test"
+    }
+    output = {
+      content = "test"
     }
   })
 }

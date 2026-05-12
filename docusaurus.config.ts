@@ -72,7 +72,9 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'Custom CRUD',
@@ -82,15 +84,58 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          to: '/docs/intro',
+          label: 'Getting Started',
           position: 'left',
-          label: 'Tutorial',
+          activeBaseRegex: '/docs/intro$',
+        },
+        {
+          type: 'dropdown',
+          label: 'Docs',
+          position: 'left',
+          items: [
+            {
+              to: '/docs/how-it-works',
+              label: 'How It Works',
+            },
+            {
+              to: '/docs/importing-resources',
+              label: 'Importing Resources',
+            },
+            {
+              to: '/docs/ephemeral-resources',
+              label: 'Ephemeral Resources',
+            },
+            {
+              to: '/docs/write-only-inputs',
+              label: 'Write-Only Inputs',
+            },
+            {
+              to: '/docs/data-sources',
+              label: 'Data Sources',
+            },
+            {
+              to: '/docs/provider-configuration',
+              label: 'Provider Configuration',
+            },
+          ],
+        },
+        {
+          href: 'https://registry.terraform.io/providers/customcrud/customcrud/latest',
+          label: 'Terraform Registry',
+          position: 'right',
         },
         {
           href: 'https://github.com/customcrud/terraform-provider-customcrud',
           label: 'GitHub',
           position: 'right',
+        },
+        {
+          type: 'html',
+          className: 'github-stars-navbar-item',
+          position: 'right',
+          value:
+            '<iframe class="github-stars-navbar" src="https://ghbtns.com/github-btn.html?user=customcrud&repo=terraform-provider-customcrud&type=star&count=true&size=large" width="170" height="30" title="GitHub Stars"></iframe>',
         },
       ],
     },
@@ -101,8 +146,32 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Getting Started',
               to: '/docs/intro',
+            },
+            {
+              label: 'How It Works',
+              to: '/docs/how-it-works',
+            },
+            {
+              label: 'Importing Resources',
+              to: '/docs/importing-resources',
+            },
+            {
+              label: 'Ephemeral Resources',
+              to: '/docs/ephemeral-resources',
+            },
+            {
+              label: 'Write-Only Inputs',
+              to: '/docs/write-only-inputs',
+            },
+            {
+              label: 'Data Sources',
+              to: '/docs/data-sources',
+            },
+            {
+              label: 'Provider Configuration',
+              to: '/docs/provider-configuration',
             },
           ],
         },
@@ -118,6 +187,10 @@ const config: Config = {
         {
           title: 'More',
           items: [
+            {
+              label: 'Terraform Registry',
+              href: 'https://registry.terraform.io/providers/customcrud/customcrud/latest',
+            },
             {
               label: 'GitHub',
               href: 'https://github.com/customcrud/terraform-provider-customcrud',

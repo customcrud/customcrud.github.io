@@ -4,20 +4,181 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 6rem 0 5rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: radial-gradient(ellipse at 20% 50%, rgba(106, 255, 120, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(107, 145, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(255, 107, 155, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 20%, rgba(255, 213, 107, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #1b1b2f 0%, #0f0f1a 100%);
+}
+
+.heroBgLogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vw;
+  max-width: 800px;
+  max-height: 800px;
+  opacity: 0.07;
+  animation: bgLogoDrift 180s linear infinite, bgLogoBlur 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroBgLogo1 {
+  top: 40%;
+  left: 30%;
+  animation: bgLogoDrift 180s linear infinite, bgLogoBlur 12s ease-in-out infinite;
+}
+
+.heroBgLogo2 {
+  top: 60%;
+  left: 70%;
+  animation: bgLogoDrift 220s linear infinite reverse, bgLogoBlur 16s ease-in-out infinite;
+  animation-delay: 0s, -4s;
+}
+
+.heroBgLogo3 {
+  top: 20%;
+  left: 60%;
+  animation: bgLogoDrift 250s linear infinite, bgLogoBlur 20s ease-in-out infinite;
+  animation-delay: 0s, -8s;
+}
+
+.heroBgLogo4 {
+  top: 70%;
+  left: 40%;
+  animation: bgLogoDrift 200s linear infinite reverse, bgLogoBlur 14s ease-in-out infinite;
+  animation-delay: 0s, -3s;
+}
+
+@keyframes bgLogoDrift {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translate(30px, 0);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(90deg) translate(0, 40px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) translate(-30px, 0);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(270deg) translate(0, -40px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translate(30px, 0);
+  }
+}
+
+@keyframes bgLogoBlur {
+  0%, 100% {
+    filter: blur(5px);
+  }
+  50% {
+    filter: blur(24px);
+  }
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 3rem 1.5rem;
   }
+}
+
+.heroBanner :global(.container) {
+  position: relative;
+  z-index: 1;
+}
+
+.heroTitle {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.35rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
 }
 
 .buttons {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.buttons :global(.button) {
+  white-space: normal;
+  text-align: center;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #6b91ff 0%, #6aff78 100%);
+  color: #0f0f1a;
+  border: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(107, 145, 255, 0.3);
+  color: #0f0f1a;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 8px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.secondaryButton:hover {
+  border-color: #6b91ff;
+  color: #fff;
+}
+
+.providerLabel {
+  display: inline-block;
+  padding: 0 0.2em;
+}
+
+.providerLanguage {
+  display: inline-block;
+  font-weight: 700;
+  min-width: 5.8em;
+  text-align: left;
+  color: var(--lang-color, #6aff78);
+  transition: color 0.3s ease;
+}
+
+.providerLanguage::after {
+  content: '_';
+  margin-left: 0.08em;
+  animation: cursorBlink 1s steps(1) infinite;
+  color: inherit;
+}
+
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
 }
