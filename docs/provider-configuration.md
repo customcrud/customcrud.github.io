@@ -14,6 +14,9 @@ provider "customcrud" {
 
   default_inputs = {
     api_url = var.api_url
+  }
+
+  sensitive_default_inputs = {
     api_key = var.api_key
   }
 }
@@ -41,14 +44,29 @@ A map of values that get merged into the `input` field of **every** hook executi
 provider "customcrud" {
   default_inputs = {
     api_url = var.api_url
+  }
+}
+```
+
+Default inputs are merged at execution time only, so they do not appear in plans or the resource's `input`. They **will** appear in debug logs and error output; use `sensitive_default_inputs` for secrets.
+
+:::warning
+Whatever a hook prints to stdout is stored in `output`. If a hook echoes its `input` back, default inputs end up in state. Strip them (e.g. `jq 'del(.input)'`) or use [`sensitive_outputs`](./how-it-works.md#sensitive-outputs).
+:::
+
+### `sensitive_default_inputs`
+
+Like `default_inputs`, but values are masked in debug logs and error output. Takes priority over `default_inputs` on overlapping keys.
+
+```hcl
+provider "customcrud" {
+  sensitive_default_inputs = {
     api_key = var.api_key
   }
 }
 ```
 
-:::warning
-Default inputs do not appear in plans or state — they are only merged at execution time. This makes them suitable for passing secrets, but be aware that values **will** appear in debug logs when `TF_LOG` is enabled.
-:::
+The hook still receives the real values, so the warning above applies here too.
 
 ### `high_precision_numbers`
 

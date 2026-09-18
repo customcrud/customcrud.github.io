@@ -35,7 +35,7 @@ When the provider executes your script, it sends a JSON object with the followin
 ```
 
 *   **`id`**: The unique identifier of the resource. This is populated from the `id` field returned by `create`, and is sent to `read`, `update`, and `delete`.
-*   **`input`**: Resource `input` merged with provider `default_inputs`. During `create` and `update`, `input_wo` is also merged into this field. See [Write-Only Inputs](./write-only-inputs.md) for details on `input_wo`.
+*   **`input`**: Resource `input` merged with provider [`default_inputs` and `sensitive_default_inputs`](./provider-configuration.md#default_inputs). During `create` and `update`, `input_wo` is also merged into this field. See [Write-Only Inputs](./write-only-inputs.md) for details on `input_wo`.
 *   **`output`**: Stored output values from the previous hook run. This is sent to `read`, `update`, and `delete`.
 
 Data source `read` hooks receive only `input`. Ephemeral `open` hooks also receive only `input`; ephemeral `renew` and `close` hooks receive the original ephemeral `input` and `output` saved after `open`.
@@ -55,6 +55,26 @@ For `create`, `read`, `update`, data source `read`, and ephemeral `open`, your s
 
 *   **`id`**: (Required for `create`) The new ID of the resource. If omitted in other phases, the existing ID is preserved.
 *   **Other keys**: Any other keys returned will be stored in the resource's `output` map. If an output key already exists in `input`, that `input` value is updated to match the returned output value for future runs.
+
+### Sensitive Outputs
+
+Keys listed in `sensitive_outputs` are moved from `output` into `output_sensitive`, which Terraform redacts in plan and apply output. Hooks still receive the combined `output`.
+
+```hcl
+resource "customcrud" "example" {
+  hooks { ... }
+  sensitive_outputs = ["token"]
+}
+
+output "token" {
+  value     = customcrud.example.output_sensitive.token
+  sensitive = true
+}
+```
+
+:::note
+Sensitive attributes are still stored in state in plain text. If a value must never reach state, don't return it from the hook.
+:::
 
 ### Exit Codes
 
